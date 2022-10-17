@@ -1,0 +1,149 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  unit-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node_version: [14, 16, 18]
+        include:
+          - os: macos-latest
+            node_version: 16
+          - os: macos-latest
+            node_version: 18
+          - os: windows-latest
+            node_version: 16
+          - os: windows-latest
+            node_version: 18
+      fail-fast: false
+
+    name: 'Build & Unit Test: node-${{ matrix.node_version }}, ${{ matrix.os }}'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set node version to ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Test
+        run: yarn test
+
+  lint:
+    runs-on: ubuntu-latest
+    name: 'Lint: node-18, ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Lint
+        run: yarn run lint
+
+  ts-check-scripts:
+    runs-on: ubuntu-latest
+    name: 'TS-Check Scripts: node-18, ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Check scripts
+        run: yarn ts-check:scripts
+
+  ts-check-tests:
+    runs-on: ubuntu-latest
+    name: 'TS-Check Tests: node-18, ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Check tests
+        run: yarn ts-check:tests
+
+  codecov:
+    runs-on: ubuntu-latest
+    name: 'Codecov: node-18, ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Build
+        run: yarn build
+
+      - name: Generate coverage report
+        run: yarn jest --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3.1.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true

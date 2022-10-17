@@ -19,6 +19,8 @@
     "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
     "lint": "gts lint",
     "lint:fix": "gts fix",
+    "ts-check:scripts": "tsc --project tsconfig.check-scripts.json",
+    "ts-check:tests": "tsc --project tsconfig.check-tests.json",
     "release": "standard-version"
   },
   "devDependencies": {
