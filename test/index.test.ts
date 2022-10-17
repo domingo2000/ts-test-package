@@ -1,4 +1,4 @@
-import {sayHello} from '.';
+import {sayHello} from '../src';
 
 describe('sayHello()', () => {
   test('should say hello', () => {
