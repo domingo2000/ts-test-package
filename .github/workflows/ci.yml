@@ -68,7 +68,7 @@ jobs:
           CYPRESS_INSTALL_BINARY: 0
 
       - name: Lint
-        run: yarn run lint
+        run: yarn lint
 
   ts-check-scripts:
     runs-on: ubuntu-latest
