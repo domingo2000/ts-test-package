@@ -1,0 +1,23 @@
+{
+  "name": "@domingo2000/ts-test-package",
+  "version": "1.0.0",
+  "description": "A minimal package to test how to bundle and publishing a typescript library",
+  "main": "dist/cjs/index.js",
+  "repository": "git@github.com:domingo2000/ts-test-package.git",
+  "author": "domingo2000 <domingo.edwards@uc.cl>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf node_modules dist",
+    "start": "node dist/index.js",
+    "build": "yarn build:clean && yarn build:code && yarn build:types",
+    "build:code": "tsx ./scripts/bundle.ts",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
+    "build:clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.11",
+    "rimraf": "^3.0.2",
+    "tsx": "^3.10.1",
+    "typescript": "^4.8.4"
+  }
+}
