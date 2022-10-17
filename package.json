@@ -1,6 +1,6 @@
 {
   "name": "@domingo2000/ts-test-package",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A minimal package to test how to bundle and publishing a typescript library",
   "main": "dist/cjs/index.js",
   "repository": "git@github.com:domingo2000/ts-test-package.git",
@@ -17,7 +17,8 @@
     "build:code": "tsx ./scripts/bundle.ts",
     "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
     "lint": "gts lint",
-    "lint:fix": "gts fix"
+    "lint:fix": "gts fix",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@types/node": "^18.11.0",
@@ -32,6 +33,7 @@
     "gts": "^3.1.1",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
+    "standard-version": "^9.5.0",
     "tsx": "^3.10.1",
     "typescript": "~4.8.4"
   }
