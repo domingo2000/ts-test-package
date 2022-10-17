@@ -1,6 +1,5 @@
-function sayHello(name: string) : void {
-  console.log('Hello!');
+function sayHello(name: string): void {
+  console.log(`Hello ${name}!`);
 }
 
-
-export { sayHello };
+export {sayHello};

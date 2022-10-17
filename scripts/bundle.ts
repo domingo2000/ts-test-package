@@ -1,6 +1,5 @@
 import {buildSync} from 'esbuild';
 
-
 console.log('Building dist for node (cjs)...');
 
 const target = ['ES2019', 'node14.6'];
@@ -10,8 +9,8 @@ buildSync({
   minify: true,
   format: 'cjs',
   platform: 'node',
-  target: ['ES2019', 'node14.6']
-})
+  target: ['ES2019', 'node14.6'],
+});
 
 console.log('Building dist for node type=module (esm)...');
 buildSync({
@@ -22,5 +21,5 @@ buildSync({
   splitting: true,
   format: 'esm',
   target,
-  outExtension: { '.js': '.mjs' },
+  outExtension: {'.js': '.mjs'},
 });

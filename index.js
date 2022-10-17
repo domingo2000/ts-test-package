@@ -1,4 +1,4 @@
-const {sayHello} = require('./dist/cjs/index')
+const {sayHello} = require('./dist/cjs/index');
 
-console.log(sayHello)
+console.log(sayHello);
 sayHello();

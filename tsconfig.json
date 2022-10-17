@@ -1,20 +1,11 @@
 {
+  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "target": "ES2019",
-    "moduleResolution": "Node",
-    "rootDir": "src",
-    "outDir": "dist",
-    "declaration": true,
-    "esModuleInterop": true,
-    "allowJs": true,
-    "alwaysStrict": true,
-    "strictFunctionTypes": true,
-    "noImplicitAny": true,
-    "useUnknownInCatchVariables": true,
-    "stripInternal": true,
-    "baseUrl": ".",
-    "module": "CommonJS"
+    "rootDir": ".",
+    "outDir": "build"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ]
 }
